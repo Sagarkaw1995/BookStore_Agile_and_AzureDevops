@@ -1,0 +1,39 @@
+﻿<Window x:Class="BookStoreGUI.OrderHistory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookStoreGUI"
+        mc:Ignorable="d"
+        Title="Past Orders" Height="310" Width="520" Loaded="Window_Loaded">
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Key="OrderActionsButton" >
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="viewOrder" Background="#ffabbaba" BorderBrush="#ff819898" Foreground="White" Content="View Order" RenderTransformOrigin="1,0" Click="viewOrderInvoice_Click"/>
+                    <Button x:Name="returnBook" Background="#ffb7c7c7" BorderBrush="#ff819898" Foreground="White" Content="Return" RenderTransformOrigin="1,0" Click="returnBook_Click"/>
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,10,10,60.667">
+            <DataGrid x:Name="OrderHistoryTable" ItemsSource="{Binding Orders}"
+            Width="495" Height="200"
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            AutoGenerateColumns="False" CanUserSortColumns="True"
+            CanUserAddRows="False"
+            SelectionMode="Single" CanUserResizeRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="80" x:Name="orderIDColumn" Header="Order No." Binding="{Binding OrderID}" />
+                    <DataGridTextColumn Width="100" x:Name="OrderDateCost" Header="Total Price" Binding="{Binding TotalPrice}" />
+                    <DataGridTextColumn Width="150" x:Name="OrderDateColumn" Header="Placed On" Binding="{Binding OrderDate}" />
+                    <DataGridTemplateColumn Width="150" Header="Actions" CellTemplate="{StaticResource OrderActionsButton}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,226,16.333,9.667" Width="457" Height="45">
+            <Button x:Name="exitButton" Height="25" MinWidth="80" Margin="7,9,0,9"
+                    Click="orderExit_Click"
+		            Content="Exit" Width="78" RenderTransformOrigin="0.599,0.882" HorizontalAlignment="Right"/>
+        </StackPanel>
+    </Grid>
+</Window>
